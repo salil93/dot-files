@@ -1,3 +1,5 @@
+silent !stty -ixon
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -30,8 +32,8 @@ colorscheme distinguished
 set cursorline
 map <F4> :NERDTreeToggle<CR>
 map <F5> :!make<CR>
-inoremap <C-s> <esc>:w<cr>a
-nnoremap <C-s> :w<cr>
+inoremap <C-s> <esc>:w<cr> :echo "Saved"<cr>a
+nnoremap <C-s> <esc>:w<cr> :echo "Saved"<cr>
 inoremap <C-w> <esc>:q<cr>
 nnoremap <C-w> :q<cr>
 
