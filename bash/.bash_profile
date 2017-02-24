@@ -10,6 +10,7 @@ export LSCOLORS=ExFxCxDxBxegedabagacad
 alias ll='ls -l'
 alias la='ls -al'
 alias connectcims='ssh sk6829@access.cims.nyu.edu'
+alias upadte_bash="source ~/.bash_profile"
 
 #screen aliases
 alias sl="screen -list"
