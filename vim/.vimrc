@@ -32,10 +32,13 @@ colorscheme distinguished
 set cursorline
 map <F4> :NERDTreeToggle<CR>
 map <F5> :!make<CR>
-inoremap <C-s> <esc>:w<cr> :echo "Saved"<cr>a
+inoremap <F5> <esc>:!make<CR>
+map <F6> :!python vim_worker.py<CR>
+inoremap <C-f> <esc>
+inoremap <C-s> <esc>:w<cr> :echo "Saved"<cr>i
 nnoremap <C-s> <esc>:w<cr> :echo "Saved"<cr>
-inoremap <C-w> <esc>:q<cr>
-nnoremap <C-w> :q<cr>
+inoremap <C-d> <esc>:q<cr>
+nnoremap <C-d> :q<cr>
 
 " [START] Configuration for folding code
 " Set a nicer foldtext function
