@@ -2,6 +2,8 @@ silent !stty -ixon
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
+set encoding=utf-8
+
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -11,8 +13,28 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
+Plugin 'scrooloose/nerdtree'
+Plugin 'majutsushi/tagbar'
+Plugin 'ervandew/supertab'
+Plugin 'junegunn/fzf.vim'
+Plugin 'junegunn/fzf'
+Plugin 'Shougo/neocomplete.vim'
 Plugin 'jelera/vim-javascript-syntax'
+Plugin 'vim-syntastic/syntastic'
+
+" Git Support
+Plugin 'kablamo/vim-git-log'
+Plugin 'gregsexton/gitv'
+Plugin 'tpope/vim-fugitive'
+
+
+"Themes/Interface
+Plugin 'ajh17/Spacegray.vim'
+Plugin 'AnsiEsc.vim'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'w0ng/vim-hybrid'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -22,23 +44,57 @@ execute pathogen#infect()
 
 set nu
 set tabstop=4
+set smarttab
+set expandtab
 set shiftwidth=4
 set ai
-set pastetoggle=<F3>
-set t_Co=256
 syntax on
-set background=dark
-colorscheme distinguished
 set cursorline
-map <F4> :NERDTreeToggle<CR>
+set hlsearch
+set ruler
+set laststatus=2
+set backspace=indent,eol,start 
+
+"Theme / Colors / GUI
+set t_Co=256
+set background=dark
+"let colors_name="spacegray"
+
+"let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+"let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
+
+"if (has("termguicolors"))
+"  set termguicolors
+"endif
+
+"let base16colorspace=256  " Access colors present in 256 colorspace
+colorscheme spacegray
+"colorscheme spacemacs-theme
+"colorscheme distinguished
+
+ 
+let g:spacegray_underline_search = 1
+let g:spacegray_italicize_comments = 1
+"--------------------------------------------------------------------------------------
+
+"Shortcuts and Key Mappings
+set pastetoggle=<F2>
+map <F3> :NERDTreeToggle<CR>
+map <F4> :TagbarToggle<CR>
 map <F5> :!make<CR>
 inoremap <F5> <esc>:!make<CR>
 map <F6> :!python vim_worker.py<CR>
 inoremap <C-f> <esc>
-inoremap <C-s> <esc>:w<cr> :echo "Saved"<cr>i
+inoremap <C-s> <esc>:w<cr> :echo "Saved"<cr>
 nnoremap <C-s> <esc>:w<cr> :echo "Saved"<cr>
 inoremap <C-d> <esc>:q<cr>
 nnoremap <C-d> :q<cr>
+inoremap <F7> <esc>gg"+vG
+nnoremap <F7> <esc>gg"+vG
+
+
+"--------------------------------------------------------------------------------------
+
 
 " [START] Configuration for folding code
 " Set a nicer foldtext function
@@ -100,3 +156,75 @@ set shellslash
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
 " [END] Configuration for Vim-Latex
+
+
+" Neocomplete Settings
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+
+" Close popup by <Space>.
+inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+" AutoComplPop like behavior.
+let g:neocomplete#enable_auto_select = 1
+
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+" Vim-Airline Configuration
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1 
+let g:airline_theme='hybrid'
+let g:hybrid_custom_term_colors = 1
+let g:hybrid_reduced_contrast = 1 
+
+" Syntastic Configuration
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_enable_elixir_checker = 1
+" let g:syntastic_elixir_checkers = ["elixir"]
+
