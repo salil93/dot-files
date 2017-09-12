@@ -23,9 +23,9 @@ Plugin 'jelera/vim-javascript-syntax'
 Plugin 'vim-syntastic/syntastic'
 
 " Git Support
-Plugin 'kablamo/vim-git-log'
-Plugin 'gregsexton/gitv'
-Plugin 'tpope/vim-fugitive'
+"Plugin 'kablamo/vim-git-log'
+"Plugin 'gregsexton/gitv'
+"Plugin 'tpope/vim-fugitive'
 
 
 "Themes/Interface
@@ -184,7 +184,7 @@ function! s:my_cr_function()
 endfunction
 
 " Close popup by <Space>.
-inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+" inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
 " AutoComplPop like behavior.
 let g:neocomplete#enable_auto_select = 1
@@ -226,7 +226,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_mode_map = {
     \ "mode": "active",
-    \ "passive_filetypes": ["html"] }
+    \ "passive_filetypes": ["html", "python"] }
 " let g:syntastic_check_on_wq = 0
 " let g:syntastic_enable_elixir_checker = 1
 " let g:syntastic_elixir_checkers = ["elixir"]
