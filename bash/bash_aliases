@@ -4,6 +4,7 @@ alias ll='ls -lh'
 alias l='ls -lh'
 alias la='ls -al'
 alias dm='cd /Users/salil/Work/DeepMagic/HandTracking'
+alias clean='rm -rf *'
 
 #Server aliases
 alias connectcims='ssh sk6829@access.cims.nyu.edu'
@@ -27,6 +28,13 @@ alias gc="git commit"
 alias gd="git diff"
 alias gl="git log"
 alias gld="git log --oneline --decorate"
+gcd() {
+    TEMP_PWD=`pwd`
+    while ! [ -d .git ]; do
+        cd ..
+    done
+    OLDPWD=$TEMP_PWD
+}
 
 #Email (mutt) aliases
 alias mutt_personal='mutt -F ~/.mutt/account.personal.mail'
