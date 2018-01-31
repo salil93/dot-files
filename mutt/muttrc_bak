@@ -1,0 +1,18 @@
+# Folder hook for Personal mail
+folder-hook 'personal.mail' 'source ~/.mutt/account.personal.mail'
+folder-hook 'deepmagic.mail' 'source ~/.mutt/account.deepmagic.mail'
+folder-hook 'nyu.mail' 'source ~/.mutt/account.nyu.mail'
+
+macro index 'c' '<change-folder>?<change-dir><home>^K=<enter>'
+# Macros for switching accounts
+macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/account.personal.mail<enter><change-folder>!<enter>'
+macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/account.deepmagic.mail<enter><change-folder>!<enter>'
+#macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/account.nyu.mail<enter><change-folder>!<enter>'
+
+
+# Default account
+source ~/.mutt/account.personal.mail
+#source ~/.mutt/account.nyu.mail
+#source ~/.mutt/account.deepmagic.mail
+
+#source ~/.mutt/sidebar.muttrc
