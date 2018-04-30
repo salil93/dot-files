@@ -1,14 +1,23 @@
 #Terminal aliases 
-alias update_bash='source ~/.bash_profile'
+if [[ `uname` == 'Linux' ]]; then
+    alias update_bash='source ~/.bashrc'
+else
+    alias update_bash='source ~/.bash_profile'
+fi
 alias ll='ls -lh'
 alias l='ls -lh'
 alias la='ls -al'
 alias dm='cd /Users/salil/Work/DeepMagic/HandTracking'
 alias clean='rm -rf *'
 
+#Application aliases
+alias vivado_tcl="/home/salil/HDD/Xilinx2016/Vivado/2016.4/bin/vivado -mode tcl -journal ~/Work/VivadoLogs/vivado.jor -appjournal -log ~/Work/VivadoLogs/vivado.log -applog"
+alias vivado_batch="/home/salil/HDD/Xilinx2016/Vivado/2016.4/bin/vivado -mode batch -journal ~/Work/VivadoLogs/vivado.jor -appjournal -log ~/Work/VivadoLogs/vivado.log -applog"
+alias vivado_gui="/home/salil/HDD/Xilinx2016/Vivado/2016.4/bin/vivado -journal ~/Work/VivadoLogs/vivado.jor -appjournal -log ~/Work/VivadoLogs/vivado.log -applog"
+
 #Server aliases
 alias connectcims='ssh sk6829@access.cims.nyu.edu'
-alias upadte_bash="source ~/.bash_profile"
+alias upadte_bash="source ~/.bashrc"
 alias deepmagic1="ssh -X sk6829@deepmagic1"
 alias deepmagic2="ssh -X salil@deepmagic2"
 
@@ -37,11 +46,9 @@ gcd() {
 }
 
 #Email (mutt) aliases
-alias mutt_personal='mutt -F ~/.mutt/account.personal.mail'
-alias mutt_dm='mutt -F ~/.mutt/account.deepmagic.mail'
+alias personalmail='neomutt -F ~/.mutt/account.personal.mail'
+alias nyumail='neomutt -F ~/.mutt/account.nyu.mail'
 
 # Todo aliases
 alias todoedit="vim ~/Documents/TODO/todo.txt"
 alias todo="cat ~/Documents/TODO/todo.txt"
-
-
