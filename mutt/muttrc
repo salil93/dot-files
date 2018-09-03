@@ -1,18 +1,117 @@
-# Folder hook for Personal mail
-folder-hook 'personal.mail' 'source ~/.mutt/account.personal.mail'
-folder-hook 'deepmagic.mail' 'source ~/.mutt/account.deepmagic.mail'
-folder-hook 'nyu.mail' 'source ~/.mutt/account.nyu.mail'
+set imap_user = 'salilkapur93@gmail.com'
+set smtp_url = 'smtp://salilkapur93@smtp.gmail.com:587/'
+set from = 'salilkapur93@gmail.com'
+set realname='Salil Kapur'
+set folder = 'imaps://imap.gmail.com:993'
+set spoolfile = '+INBOX'
+set postponed = '+[Gmail]/Drafts'
+set header_cache = ~/.mutt/cache/headers
+set message_cachedir = ~/.mutt/cache/bodies
+set certificate_file = ~/.mutt/certificates
+set move = no
+set smtp_authenticators = 'gssapi:login'
 
-macro index 'c' '<change-folder>?<change-dir><home>^K=<enter>'
-# Macros for switching accounts
-macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/account.personal.mail<enter><change-folder>!<enter>'
-macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/account.deepmagic.mail<enter><change-folder>!<enter>'
-#macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/account.nyu.mail<enter><change-folder>!<enter>'
+macro index d "<save-message>=[Gmail]/Trash<enter>" "Trash"
+
+# customizations
+set sort=threads
+set sort_browser=date
+set sort_aux=reverse-last-date-received
+auto_view text/html
+alternative_order text/plain text/enriched text/html
+bind pager k previous-line
+bind pager j next-line
+bind index G imap-fetch-mail
+
+# Patch color customizations
+color   body       yellow          default      "^diff \-.*"
+color   body       yellow          default      "^index [a-f0-9].*"
+color   body       yellow          default      "^\-\-\- .*"
+color   body       yellow          default      "^[\+]{3} .*"
+color   body       green           default      "^[\+][^\+]+.*"
+color   body       red             default      "^\-[^\-]+.*"
+color   body       magenta         default      "^@@ .*"
+color   body       yellow          default      "^\-\- >8 \-\-$"
+
+color   body       cyan            default      "^Signed-off-by: .*$"
+color   body       cyan            default      "^Acked-by: .*$"
+color   body       cyan            default      "^Reported-by: .*$"
+color   body       cyan            default      "^Tested-by: .*$"
+color   body       cyan            default      "^Reviewed-by: .*$"
+color   body       cyan            default      "^Suggested-by: .*$"
+color   body       cyan            default      "^Cc: .*$"
+
+# The chosen color selection
+# 34 - green
+# 111 - blue
+# 124 - red
+# 142 - orange
+# 193 - tan
+# 233 - black
+
+# general-doesn't-fit stuff
+color normal white color233
+color error white color124
+color markers color142 color233
+color tilde color142 color233
+color status color142 color233
+
+# index stuff
+color tree color124 color233
+color indicator color233 white
+color index white color233 ~A
+color index color34 color233 ~N
+color index color34 color233 ~O
+color index color124 color233 ~F
+
+# header stuff
+color hdrdefault color124 color233
+color header color111 color233 "^Subject"
+
+# gpg stuff
+color body color34 color233 "^gpg: Good signature.*"
+color body white color124 "^gpg: BAD signature.*"
+color body color142 color233 "^gpg: Can't check signature.*"
+color body color142 color233 "^-----BEGIN PGP SIGNED MESSAGE-----"
+color body color142 color233 "^-----BEGIN PGP SIGNATURE-----"
+color body color142 color233 "^-----END PGP SIGNED MESSAGE-----"
+color body color142 color233 "^-----END PGP SIGNATURE-----"
+color body color142 color233 "^Version: GnuPG.*"
+color body color142 color233 "^Comment: .*"
+#color body color142 color233 "^[[:alnum:]/\+=]+[[:space:]]+$"
 
 
-# Default account
-source ~/.mutt/account.personal.mail
-#source ~/.mutt/account.nyu.mail
-#source ~/.mutt/account.deepmagic.mail
+# url, email and web stuff
+color body color111 color233 "(finger|ftp|http|https|news|telnet)://[^ >]*"
+color body color111 color233 "<URL:[^ ]*>"
+color body color111 color233 "www\\.[-.a-z0-9]+\\.[a-z][a-z][a-z]?([-_./~a-z0-9]+)?"
+color body color111 color233 "mailto: *[^ ]+\(\\i?subject=[^ ]+\)?"
+color body color111 color233 "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
 
-#source ~/.mutt/sidebar.muttrc
+# misc body stuff
+color attachment color111 color233
+color signature color142 color233
+
+# quote levels
+color quoted color34 color233
+color quoted1 color142 color233
+color quoted2 color34 color233
+color quoted3 color142 color233
+color quoted4 color34 color233
+color quoted5 color142 color233
+color quoted6 color34 color233
+color quoted7 color142 color233
+color quoted8 color34 color233
+color quoted9 color142 color233
+
+# Quoted body
+#color 	quoted		magenta		default		# quoted text
+#color 	quoted1		cyan		default
+#color 	quoted2  	red		    default
+#color	quoted3		green		default
+#color 	quoted4		blue		default
+#color 	quoted5		magenta		default
+#color 	quoted6		cyan	  	default
+#color   quoted7		red		    default
+#color 	quoted8		green		default
+#color 	quoted9 	cyan		default
