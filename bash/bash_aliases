@@ -1,19 +1,23 @@
-#Terminal aliases
-alias update_bash='source ~/.bash_profile'
+#Terminal aliases 
+if [[ `uname` == 'Linux' ]]; then
+    alias update_bash='source ~/.bashrc'
+else
+    alias update_bash='source ~/.bash_profile'
+fi
 alias ll='ls -lh'
 alias l='ls -lh'
 alias la='ls -al'
 alias dm='cd /Users/salil/Work/DeepMagic/HandTracking'
 alias clean='rm -rf *'
-alias v='vim'
-alias vi='vim'
-alias ub="source ~/.bash_profile"
-alias acad="cd ~/Documents/Academics"
-alias sml=/usr/local/smlnj/bin/sml
-alias scala=~/Documents/Academics/Fall17/PL/scala/bin/scala
+
+#Application aliases
+alias vivado_tcl="/home/salil/HDD/Xilinx2016/Vivado/2016.4/bin/vivado -mode tcl -journal ~/Work/VivadoLogs/vivado.jor -appjournal -log ~/Work/VivadoLogs/vivado.log -applog"
+alias vivado_batch="/home/salil/HDD/Xilinx2016/Vivado/2016.4/bin/vivado -mode batch -journal ~/Work/VivadoLogs/vivado.jor -appjournal -log ~/Work/VivadoLogs/vivado.log -applog"
+alias vivado_gui="/home/salil/HDD/Xilinx2016/Vivado/2016.4/bin/vivado -journal ~/Work/VivadoLogs/vivado.jor -appjournal -log ~/Work/VivadoLogs/vivado.log -applog"
 
 #Server aliases
 alias connectcims='ssh sk6829@access.cims.nyu.edu'
+alias upadte_bash="source ~/.bashrc"
 alias deepmagic1="ssh -X sk6829@deepmagic1"
 alias deepmagic2="ssh -X salil@deepmagic2"
 
@@ -27,16 +31,12 @@ alias tn="tmux new-session -s"
 alias ta="tmux attach-session -t"
 
 #git aliases
-alias g="git"
 alias gp="git push"
 alias gs="git status"
 alias gc="git commit"
 alias gd="git diff"
 alias gl="git log"
 alias gld="git log --oneline --decorate"
-alias gpo="git push origin"
-alias gplo="git pull origin"
-
 gcd() {
     TEMP_PWD=`pwd`
     while ! [ -d .git ]; do
@@ -46,11 +46,9 @@ gcd() {
 }
 
 #Email (mutt) aliases
-alias mutt_personal='mutt -F ~/.mutt/account.personal.mail'
+alias personalmail='neomutt -F ~/.mutt/account.personal.mail'
+alias nyumail='neomutt -F ~/.mutt/account.nyu.mail'
 
 # Todo aliases
 alias todoedit="vim ~/Documents/TODO/todo.txt"
 alias todo="cat ~/Documents/TODO/todo.txt"
-
-# Compiler aliases
-alias ma="gnatmake"
