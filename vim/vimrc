@@ -33,14 +33,13 @@ set cursorline
 set hlsearch
 set ruler
 set laststatus=2
-set backspace=indent,eol,start 
-
+set backspace=indent,eol,start
+set textwidth=80
+"let &colorcolumn=join(range(81,999),",")
 "Theme / Colors / GUI
 set t_Co=256
-set background=dark
-
-"let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
-"let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
+set background=light
+autocmd BufWritePre * %s/\s\+$//e
 
 "if (has("termguicolors"))
 "  set termguicolors
@@ -57,6 +56,7 @@ map <F5> :!make<CR>
 inoremap <F5> <esc>:!make<CR>
 map <F6> :!python vim_worker.py<CR>
 inoremap <C-f> <esc>
+nnoremap <C-f> <esc>
 inoremap <C-s> <esc>:w<cr> :echo "Saved"<cr>
 nnoremap <C-s> <esc>:w<cr> :echo "Saved"<cr>
 inoremap <C-d> <esc>:q<cr>
@@ -70,8 +70,8 @@ nnoremap <F7> <esc>gg"+vG
 
 " [START] Configuration for folding code
 " Set a nicer foldtext function
-set foldmethod=syntax
-set foldtext=MyFoldText()
+" set foldmethod=syntax
+" set foldtext=MyFoldText()
 function! MyFoldText()
   let line = getline(v:foldstart)
   if match( line, '^[ \t]*\(\/\*\|\/\/\)[*/\\]*[ \t]*$' ) == 0
@@ -113,7 +113,7 @@ highlight LineNr      gui=NONE    guifg=white      guibg=Grey90
 " Don't screw up folds when inserting text that might affect them, until
 " leaving insert mode. Foldmethod is local to the window. Protect against
 " screwing up folding when switching between windows.
-" Link: http://vim.wikia.com/wiki/Keep_folds_closed_while_inserting_text 
+" Link: http://vim.wikia.com/wiki/Keep_folds_closed_while_inserting_text
 autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
 autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
