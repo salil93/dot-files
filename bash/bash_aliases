@@ -4,11 +4,15 @@ if [[ `uname` == 'Linux' ]]; then
 else
     alias update_bash='source ~/.bash_profile'
 fi
+
+alias ub='update_bash'
 alias ll='ls -lh'
-alias l='ls -lh'
+alias l='ll'
 alias la='ls -al'
-alias dm='cd /Users/salil/Work/DeepMagic/HandTracking'
 alias clean='rm -rf *'
+alias open='xdg-open'
+alias lr='/home/salil/Work/Tools/latexrun/latexrun'
+alias ds='cd ~/Work/DistributedSystems'
 
 #Application aliases
 alias vivado_tcl="/home/salil/HDD/Xilinx2016/Vivado/2016.4/bin/vivado -mode tcl -journal ~/Work/VivadoLogs/vivado.jor -appjournal -log ~/Work/VivadoLogs/vivado.log -applog"
@@ -46,8 +50,7 @@ gcd() {
 }
 
 #Email (mutt) aliases
-alias personalmail='neomutt -F ~/.mutt/account.personal.mail'
-alias nyumail='neomutt -F ~/.mutt/account.nyu.mail'
+alias nyumutt='mutt -F ~/.mutt/nyu.muttrc'
 
 # Todo aliases
 alias todoedit="vim ~/Documents/TODO/todo.txt"
